@@ -2,12 +2,15 @@ import express from "express";
 import bcrypt from "bcrypt";
 import cors from "cors";
 import multer from "multer";
+import fs from 'fs';
 import { mongoose } from "mongoose";
 import dotenv from "dotenv";
 import handleSignUp from "./controllers/SignUp.js";
 import handleSignin from "./controllers/SignIn.js";
 import handleUpload from "./controllers/handleUpload.js";
-const upload = multer({ dest: 'uploads/' });
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 const app = express();
 dotenv.config();
 
@@ -59,7 +62,7 @@ app.post("/signin", (req, res) => {
 
 // Stores the uploaded resume in database
 app.post("/upload", upload.single('file'), (req, res) => {
-    handleUpload(req,res,Resume);
+    handleUpload(req,res,Resume,fs);
 })
 
 app.listen(process.env.PORT || 3001, () => {
