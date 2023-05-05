@@ -20,7 +20,7 @@ MongoDB
 
 **Getting Started**
 
-To get started with the website, simply navigate to the URL for the website(   ) and you will be able to use the functionalities provided by the website.
+To get started with the website, simply navigate to the URL for the website( https://yourhr-1w7x.onrender.com ) and you will be able to use the functionalities provided by the website.
 
 **Structure and Design**
 
@@ -102,6 +102,12 @@ o	/signin
 o	/signup
 
 o	/upload
+
+**Database Structure:**
+
+MongoDB Atlas is used for storing users’ data. The database schema for the YourHR website includes the following collections:
+•	users: Stores the user’s credentials, i.e., firstname, lastname, email, password (hashed password).
+•	resumes: Stores the user’s resume file along with their information.
 
 
 **Conclusion**
