@@ -22,11 +22,11 @@ const handleSignUp=async (req,res,bcrypt,User)=>{
             password:hash
         });
         user.save();
-        res.redirect(307,"/signup");
+        res.json(user);
     }
     // If user already exists just send the already created user as a response
     else{
-        res.json(foundOne);
+        res.json("Already registered");
     }
 }
 
