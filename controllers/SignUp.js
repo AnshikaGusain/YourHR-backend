@@ -11,7 +11,7 @@ const handleSignUp=async (req,res,bcrypt,User)=>{
     const hash=bcrypt.hashSync(password,10);
 
     // Checking if user already exists or not
-    const foundOne=await User.findOne({$and:[{firstname:firstname.toLowerCase()},{lastname:lastname.toLowerCase()}]});
+    const foundOne=await User.findOne({email:email});
 
     // If user does not exist create one and store it in database
     if(!foundOne){
