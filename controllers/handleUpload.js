@@ -1,5 +1,7 @@
 const handleUpload=(req,res,Resume)=>{
     const {firstname,lastname,email}=req.body;
+
+    // Creating a new object containing info and resume of user
     const newResume = new Resume({
         firstname: firstname,
         lastname:lastname,

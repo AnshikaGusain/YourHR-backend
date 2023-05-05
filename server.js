@@ -16,9 +16,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// mongodb+srv://admin-anshika:<password>@cluster0.wzrpvnt.mongodb.net/test
+
 mongoose.set('strictQuery', false);
 mongoose.connect(`mongodb+srv://admin-anshika:${process.env.PASSWORD}@cluster0.wzrpvnt.mongodb.net/applicant`);
+
+
+// Stores user credentials
 
 const userSchema = new mongoose.Schema({
     firstname: { type: String, required: true },
@@ -30,6 +33,8 @@ const userSchema = new mongoose.Schema({
 const User = new mongoose.model("user", userSchema);
 
 
+
+// Stores user resume with their name,email
 const resumeSchema = new mongoose.Schema({
     firstname:String,
     lastname:String,
@@ -41,22 +46,22 @@ const resumeSchema = new mongoose.Schema({
 
 const Resume=new mongoose.model("resume",resumeSchema);
 
-app.get("/signup", (req, res) => {
-    res.send("hello");
-})
+
+// Handles Sign Up functionality
 app.post("/signup", (req, res) => {
     handleSignUp(req, res, bcrypt, User);
-    // const {firstname,lastname,email,password}=req.body;
-    // console.log(firstname,lastname,email,password);
-    // console.log(req.body);
 })
+
+// Handles Sign In functionality
 app.post("/signin", (req, res) => {
     handleSignin(req, res, bcrypt, User);
 })
 
+// Stores the uploaded resume in database
 app.post("/upload", upload.single('file'), (req, res) => {
     handleUpload(req,res,Resume);
 })
-app.listen(3001, () => {
+
+app.listen(process.env.PORT || 3001, () => {
     console.log("Server started on port 3001");
 })
